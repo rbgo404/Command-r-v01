@@ -1,11 +1,13 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM , BitsAndBytesConfig
+import os
 
 class InferlessPythonModel:
     def initialize(self):
         model_id = "CohereForAI/c4ai-command-r-v01"
-        self.tokenizer = AutoTokenizer.from_pretrained(model_id)
+        HF_TOKEN = os.getenv("HF_TOKEN") # Access Hugging Face token from environment variable
+        self.tokenizer = AutoTokenizer.from_pretrained(model_id, token=HF_TOKEN)
         bnb_config = BitsAndBytesConfig(load_in_8bit=True)
-        self.model = AutoModelForCausalLM.from_pretrained(model_id,quantization_config=bnb_config,device_map = 'cuda')
+        self.model = AutoModelForCausalLM.from_pretrained(model_id,quantization_config=bnb_config, token=HF_TOKEN,device_map = 'cuda')
 
     def infer(self,inputs):
         prompt = inputs["prompt"]

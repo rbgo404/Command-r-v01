@@ -27,6 +27,7 @@ configuration:
   vcpu: '3'
   ram: '20'
 env:
+  HF_TOKEN: '<hugging_face_token>'
   # Add your environment variables here
   # ENV: 'PROD'
 secrets:
