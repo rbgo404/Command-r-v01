@@ -16,4 +16,4 @@ class InferlessPythonModel:
         return { "generated_text" : generated_text}
 
     def finalize(self):
-        self.pipe = None
+        self.model = None
